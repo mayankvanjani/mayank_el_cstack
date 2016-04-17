@@ -153,7 +153,8 @@ void add_sphere( struct matrix * points,
   }
 }
 
-/*======== void generate_sphere() ==========
+/*
+======== void generate_sphere() ==========
   Inputs:   struct matrix * points
             double cx
 	    double cy
@@ -168,7 +169,8 @@ void add_sphere( struct matrix * points,
 
   03/22/12 11:30:26
   jdyrlandweaver
-  ====================*/
+  ====================
+*/
 void generate_sphere( struct matrix * points, 
 		      double cx, double cy, double r, 
 		      int step ) {
