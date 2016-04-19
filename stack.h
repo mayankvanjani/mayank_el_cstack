@@ -3,6 +3,8 @@
 
 #define STACK_SIZE 2
 
+#include "matrix.h"
+
 struct stack {
   int size;
   int top;
