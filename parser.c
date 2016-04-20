@@ -73,7 +73,6 @@ be sure to conver those degrees to radians (M_PI is the constant
 for PI)
 ====================*/
 void parse_file ( char * filename, 
-                  struct stack * origins, 
 		  struct matrix * transform,
                   struct matrix * pm,
                   screen s) {
@@ -83,6 +82,7 @@ void parse_file ( char * filename,
   struct matrix * tmp;
   double angle;
   color g;
+  struct stack * origins = new_stack(); 
   //  print_matrix( origins->data[origins->top]);
 
   g.red = 0;
@@ -99,7 +99,7 @@ void parse_file ( char * filename,
   while ( fgets(line, 255, f) != NULL ) {
     line[strlen(line)-1]='\0';
     //printf(":%s:\n",line);
-    double x, y, z, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
+    double x, y, z, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, r;
    
     if ( strncmp(line, "line", strlen(line)) == 0 ) {
       //      printf("LINE!\n");
@@ -150,20 +150,20 @@ void parse_file ( char * filename,
       sscanf(line, "%lf %lf %lf %lf %lf %lf", &x, &y, &z, &x1, &y1, &z1);
       add_box(pm, x, y, z, x1, y1, z1);
       matrix_mult( origins->data[ origins->top ], pm);
-      print_matrix( origins->data[origins->top]);
+      //      print_matrix( origins->data[origins->top]);
       draw_polygons( pm, s, g);
       pm->lastcol = 0;
       // printf( "%lf %lf %lf %lf %lf %lf\n", x, y, z, x1, y1, z1);
     }
     else if (strncmp(line, "sphere", strlen(line)) == 0 ) {
       fgets(line, 255, f);
-      sscanf(line, "%lf %lf %lf", &x, &y, &z);
-      add_sphere(pm, x, y, z, 10);
+      sscanf(line, "%lf %lf %lf %lf", &x, &y, &z, &r);
+      add_sphere(pm, x, y, r, 10);
       matrix_mult( origins->data[ origins->top ], pm);
       print_matrix( origins->data[origins->top]);
       draw_polygons( pm, s, g);
       pm->lastcol = 0;
-      //printf( "%lf %lf %lf\n", x, y, z);
+      //      printf( "\n%lf %lf %lf\n\n", x, y, z, r);
     }
     else if (strncmp(line, "torus", strlen(line)) == 0 ) {
       fgets(line, 255, f);

@@ -91,7 +91,7 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
   jdyrlandweaver
   ====================*/
 void add_sphere( struct matrix * points, 
-		 double cx, double cy, double r, 
+		 double cx, double cy, double r,
 		 int step ) {
 
   struct matrix * temp;
