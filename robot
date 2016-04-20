@@ -8,8 +8,6 @@ translate
 0 176 0
 sphere
 0 0 0 50
-apply
-display
 save
 pic.png
 quit
