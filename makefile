@@ -28,4 +28,4 @@ gmath.o: gmath.c gmath.h matrix.h
 	$(CC) $(CFLAGS) -c gmath.c
 
 clean:
-	rm *.o *~ *#
+	rm *.png *.o *~ *#

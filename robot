@@ -48,6 +48,8 @@ xrotate
 20
 box
 0 0 20 60 100 40
+save
+pic.png
 display
 quit
 

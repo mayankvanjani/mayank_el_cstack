@@ -157,13 +157,13 @@ void parse_file ( char * filename,
     }
     else if (strncmp(line, "sphere", strlen(line)) == 0 ) {
       fgets(line, 255, f);
-      sscanf(line, "%lf %lf %lf %lf", &x, &y, &z, &r);
-      add_sphere(pm, x, y, r, 10);
+      sscanf(line, "%lf %lf %lf", &x, &y, &z);
+      add_sphere(pm, x, y, z, 10);
       matrix_mult( origins->data[ origins->top ], pm);
       print_matrix( origins->data[origins->top]);
       draw_polygons( pm, s, g);
       pm->lastcol = 0;
-      //      printf( "\n%lf %lf %lf\n\n", x, y, z, r);
+      //      printf( "SPHERE\n%lf %lf %lf %lf\n\n", x, y, z, r);
     }
     else if (strncmp(line, "torus", strlen(line)) == 0 ) {
       fgets(line, 255, f);
@@ -249,16 +249,26 @@ void parse_file ( char * filename,
     else if ( strncmp(line, "push", strlen(line)) == 0 ) {
       push(origins);
       //      print_matrix( origins->data[ origins->top ]);
+      printf( "%s\n", g.red);
       printf("\n");
     }
     else if ( strncmp(line, "pop", strlen(line)) == 0 ) {
       pop(origins);
     }
 
+    else if ( strncmp(line, "change_color", strlen(line)) == 0 ) {
+      fgets(line, 255, f);
+      sscanf(line, "%lf %lf %lf", &x, &y, &z);
+      g.red = x;
+      g.green = y;
+      g.blue = z;
+    }
+
     else if ( strncmp(line, "display", strlen(line)) == 0 ) {
       //      clear_screen(s);
       //      draw_polygons(pm, s, g);
       display(s);
+
     }
     else if ( strncmp(line, "save", strlen(line)) == 0 ) {
       fgets(line, 255, f);
